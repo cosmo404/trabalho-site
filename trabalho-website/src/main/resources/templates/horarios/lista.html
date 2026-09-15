@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Horários</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>Horários</h1>
+
+    <div class="topo">
+
+        <a href="/" class="botao cinza">
+            Voltar
+        </a>
+
+        <a href="/horarios/novo" class="botao">
+            Novo Horário
+        </a>
+
+    </div>
+
+    <table>
+
+        <thead>
+
+        <tr>
+            <th>Professor</th>
+            <th>Disciplina</th>
+            <th>Turma</th>
+            <th>Dia</th>
+            <th>Início</th>
+            <th>Fim</th>
+            <th>Ações</th>
+        </tr>
+
+        </thead>
+
+        <tbody>
+
+        <tr th:each="horario : ${horarios}">
+
+            <td th:text="${horario.professor.nome}"></td>
+
+            <td th:text="${horario.disciplina.nome}"></td>
+
+            <td th:text="${horario.turma.nome}"></td>
+
+            <td th:text="${horario.diaSemana}"></td>
+
+            <td th:text="${horario.horaInicio}"></td>
+
+            <td th:text="${horario.horaFim}"></td>
+
+            <td>
+
+                <a
+                    th:href="@{/horarios/editar/{id}(id=${horario.id})}"
+                    class="botao editar">
+
+                    Editar
+                </a>
+
+                <form
+                    th:action="@{/horarios/excluir/{id}(id=${horario.id})}"
+                    method="post"
+                    class="form-excluir">
+
+                    <button
+                        type="submit"
+                        class="botao excluir"
+                        onclick="return confirm('Deseja excluir este horário?')">
+
+                        Excluir
+                    </button>
+
+                </form>
+
+            </td>
+
+        </tr>
+
+        </tbody>
+
+    </table>
+
+</div>
+
+</body>
+</html>

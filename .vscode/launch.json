@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-TrabalhoWebsiteApplication<trabalho-website>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "br.com.trabalhowebsite.trabalho_website.TrabalhoWebsiteApplication",
+            "projectName": "trabalho-website",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Disciplina</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+
+<body>
+
+<div class="container formulario">
+
+    <h1 th:text="${disciplina.id == null ? 'Nova Disciplina' : 'Editar Disciplina'}">
+        Disciplina
+    </h1>
+
+    <form
+        th:action="@{/disciplinas/salvar}"
+        th:object="${disciplina}"
+        method="post">
+
+        <input type="hidden" th:field="*{id}">
+
+        <div class="campo">
+
+            <label>Código:</label>
+
+            <input
+                type="text"
+                th:field="*{codigo}"
+                required>
+
+        </div>
+
+        <div class="campo">
+
+            <label>Nome:</label>
+
+            <input
+                type="text"
+                th:field="*{nome}"
+                required>
+
+        </div>
+
+        <div class="botoes">
+
+            <button type="submit" class="botao">
+                Salvar
+            </button>
+
+            <a href="/disciplinas" class="botao cinza">
+                Cancelar
+            </a>
+
+        </div>
+
+    </form>
+
+</div>
+
+</body>
+</html>

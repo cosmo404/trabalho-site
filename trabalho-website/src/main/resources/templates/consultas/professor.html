@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Horários por Professor</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>Horários por Professor</h1>
+
+    <form method="get" action="/consultas/professor">
+
+        <div class="campo">
+
+            <label>Professor:</label>
+
+            <select name="professorId" required>
+
+                <option value="">
+                    Selecione um professor
+                </option>
+
+                <option
+                    th:each="professor : ${professores}"
+                    th:value="${professor.id}"
+                    th:text="${professor.nome}">
+                </option>
+
+            </select>
+
+        </div>
+
+        <button type="submit" class="botao">
+            Consultar
+        </button>
+
+        <a href="/" class="botao cinza">
+            Voltar
+        </a>
+
+    </form>
+
+    <div th:if="${professorSelecionado != null}">
+
+        <h2 th:text="'Professor: ' + ${professorSelecionado.nome}"></h2>
+
+        <table>
+
+            <thead>
+            <tr>
+                <th>Disciplina</th>
+                <th>Turma</th>
+                <th>Dia</th>
+                <th>Início</th>
+                <th>Fim</th>
+            </tr>
+            </thead>
+
+            <tbody>
+
+            <tr th:each="horario : ${horarios}">
+
+                <td th:text="${horario.disciplina.nome}"></td>
+
+                <td th:text="${horario.turma.nome}"></td>
+
+                <td th:text="${horario.diaSemana}"></td>
+
+                <td th:text="${horario.horaInicio}"></td>
+
+                <td th:text="${horario.horaFim}"></td>
+
+            </tr>
+
+            </tbody>
+
+        </table>
+
+        <p
+            th:if="${#lists.isEmpty(horarios)}"
+            class="mensagem">
+
+            Nenhum horário encontrado para este professor.
+        </p>
+
+    </div>
+
+</div>
+
+</body>
+</html>

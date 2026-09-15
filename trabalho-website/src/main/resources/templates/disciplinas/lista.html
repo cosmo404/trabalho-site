@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Disciplinas</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>Disciplinas</h1>
+
+    <div class="topo">
+        <a href="/" class="botao cinza">Voltar</a>
+        <a href="/disciplinas/novo" class="botao">Nova Disciplina</a>
+    </div>
+
+    <table>
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Código</th>
+            <th>Nome</th>
+            <th>Ações</th>
+        </tr>
+        </thead>
+
+        <tbody>
+
+        <tr th:each="disciplina : ${disciplinas}">
+
+            <td th:text="${disciplina.id}"></td>
+            <td th:text="${disciplina.codigo}"></td>
+            <td th:text="${disciplina.nome}"></td>
+
+            <td>
+
+                <a
+                    th:href="@{/disciplinas/editar/{id}(id=${disciplina.id})}"
+                    class="botao editar">
+
+                    Editar
+                </a>
+
+                <form
+                    th:action="@{/disciplinas/excluir/{id}(id=${disciplina.id})}"
+                    method="post"
+                    class="form-excluir">
+
+                    <button
+                        class="botao excluir"
+                        type="submit"
+                        onclick="return confirm('Deseja excluir esta disciplina?')">
+
+                        Excluir
+                    </button>
+
+                </form>
+
+            </td>
+
+        </tr>
+
+        </tbody>
+    </table>
+
+    <p
+        th:if="${#lists.isEmpty(disciplinas)}"
+        class="mensagem">
+
+        Nenhuma disciplina cadastrada.
+    </p>
+
+</div>
+
+</body>
+</html>

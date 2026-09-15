@@ -1,0 +1,23 @@
+Rapaziada, eu fiz a estrutura inicial do projeto em Java + Spring Boot + Thymeleaf + H2. Para rodar no PC de vocês, primeiro extraiam o arquivo ZIP e abram a pasta trabalho-website no VS Code.
+
+precisa ter o JDK 21 instalado. No terminal do VS Code, entrem na pasta do projeto e executem:
+
+.\mvnw.cmd spring-boot:run
+
+Quando aparecer algo como:
+
+Started TrabalhoWebsiteApplication
+
+abram no navegador:
+
+http://localhost:8080
+
+O sistema já tem cadastro, edição, exclusão e listagem de professores, disciplinas, turmas e horários, além das consultas de horários por professor e por turma.
+
+Se no terminal aparecer erro falando de JRE/JDK, configurem o Java 21 no VS Code ou coloquem o JAVA_HOME apontando para a pasta do JDK 21. O projeto precisa usar JDK, não só JRE.
+
+Para parar o sistema, usem:
+
+Ctrl + C
+
+Qualquer coisa tirem print do terminal e manda pro chat gpt q ele pode explicar melhor os erros e ajudar vocês a rodar o programa

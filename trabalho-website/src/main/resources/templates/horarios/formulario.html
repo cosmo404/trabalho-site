@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Horário</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+
+<body>
+
+<div class="container formulario">
+
+    <h1 th:text="${horario.id == null ? 'Novo Horário' : 'Editar Horário'}">
+        Horário
+    </h1>
+
+    <form
+        th:action="@{/horarios/salvar}"
+        th:object="${horario}"
+        method="post">
+
+        <input type="hidden" th:field="*{id}">
+
+        <div class="campo">
+
+            <label>Professor:</label>
+
+            <select name="professorId" required>
+
+                <option value="">
+                    Selecione
+                </option>
+
+                <option
+                    th:each="professor : ${professores}"
+                    th:value="${professor.id}"
+                    th:text="${professor.nome}"
+                    th:selected="${horario.professor != null and horario.professor.id == professor.id}">
+                </option>
+
+            </select>
+
+        </div>
+
+        <div class="campo">
+
+            <label>Disciplina:</label>
+
+            <select name="disciplinaId" required>
+
+                <option value="">
+                    Selecione
+                </option>
+
+                <option
+                    th:each="disciplina : ${disciplinas}"
+                    th:value="${disciplina.id}"
+                    th:text="${disciplina.nome}"
+                    th:selected="${horario.disciplina != null and horario.disciplina.id == disciplina.id}">
+                </option>
+
+            </select>
+
+        </div>
+
+        <div class="campo">
+
+            <label>Turma:</label>
+
+            <select name="turmaId" required>
+
+                <option value="">
+                    Selecione
+                </option>
+
+                <option
+                    th:each="turma : ${turmas}"
+                    th:value="${turma.id}"
+                    th:text="${turma.nome}"
+                    th:selected="${horario.turma != null and horario.turma.id == turma.id}">
+                </option>
+
+            </select>
+
+        </div>
+
+        <div class="campo">
+
+            <label>Dia da semana:</label>
+
+            <select th:field="*{diaSemana}" required>
+
+                <option value="">
+                    Selecione
+                </option>
+
+                <option value="Segunda-feira">Segunda-feira</option>
+                <option value="Terça-feira">Terça-feira</option>
+                <option value="Quarta-feira">Quarta-feira</option>
+                <option value="Quinta-feira">Quinta-feira</option>
+                <option value="Sexta-feira">Sexta-feira</option>
+                <option value="Sábado">Sábado</option>
+
+            </select>
+
+        </div>
+
+        <div class="campo">
+
+            <label>Hora inicial:</label>
+
+            <input
+                type="time"
+                th:field="*{horaInicio}"
+                required>
+
+        </div>
+
+        <div class="campo">
+
+            <label>Hora final:</label>
+
+            <input
+                type="time"
+                th:field="*{horaFim}"
+                required>
+
+        </div>
+
+        <div class="botoes">
+
+            <button type="submit" class="botao">
+                Salvar
+            </button>
+
+            <a href="/horarios" class="botao cinza">
+                Cancelar
+            </a>
+
+        </div>
+
+    </form>
+
+</div>
+
+</body>
+</html>

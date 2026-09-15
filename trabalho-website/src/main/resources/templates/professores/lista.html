@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Professores</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>Professores</h1>
+
+    <div class="topo">
+        <a href="/" class="botao cinza">Voltar</a>
+        <a href="/professores/novo" class="botao">Novo Professor</a>
+    </div>
+
+    <table>
+
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nome</th>
+            <th>E-mail</th>
+            <th>Ações</th>
+        </tr>
+        </thead>
+
+        <tbody>
+
+        <tr th:each="professor : ${professores}">
+
+            <td th:text="${professor.id}"></td>
+
+            <td th:text="${professor.nome}"></td>
+
+            <td th:text="${professor.email}"></td>
+
+            <td>
+
+                <a
+                    th:href="@{/professores/editar/{id}(id=${professor.id})}"
+                    class="botao editar">
+                    Editar
+                </a>
+
+                <form
+                    th:action="@{/professores/excluir/{id}(id=${professor.id})}"
+                    method="post"
+                    class="form-excluir">
+
+                    <button
+                        type="submit"
+                        class="botao excluir"
+                        onclick="return confirm('Deseja realmente excluir este professor?')">
+                        Excluir
+                    </button>
+
+                </form>
+
+            </td>
+
+        </tr>
+
+        </tbody>
+
+    </table>
+
+    <p
+        th:if="${#lists.isEmpty(professores)}"
+        class="mensagem">
+
+        Nenhum professor cadastrado.
+
+    </p>
+
+</div>
+
+</body>
+</html>

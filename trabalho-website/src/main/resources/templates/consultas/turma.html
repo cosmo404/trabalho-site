@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Horários por Turma</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>Horários por Turma</h1>
+
+    <form method="get" action="/consultas/turma">
+
+        <div class="campo">
+
+            <label>Turma:</label>
+
+            <select name="turmaId" required>
+
+                <option value="">
+                    Selecione uma turma
+                </option>
+
+                <option
+                    th:each="turma : ${turmas}"
+                    th:value="${turma.id}"
+                    th:text="${turma.nome}">
+                </option>
+
+            </select>
+
+        </div>
+
+        <button type="submit" class="botao">
+            Consultar
+        </button>
+
+        <a href="/" class="botao cinza">
+            Voltar
+        </a>
+
+    </form>
+
+    <div th:if="${turmaSelecionada != null}">
+
+        <h2 th:text="'Turma: ' + ${turmaSelecionada.nome}"></h2>
+
+        <table>
+
+            <thead>
+            <tr>
+                <th>Professor</th>
+                <th>Disciplina</th>
+                <th>Dia</th>
+                <th>Início</th>
+                <th>Fim</th>
+            </tr>
+            </thead>
+
+            <tbody>
+
+            <tr th:each="horario : ${horarios}">
+
+                <td th:text="${horario.professor.nome}"></td>
+
+                <td th:text="${horario.disciplina.nome}"></td>
+
+                <td th:text="${horario.diaSemana}"></td>
+
+                <td th:text="${horario.horaInicio}"></td>
+
+                <td th:text="${horario.horaFim}"></td>
+
+            </tr>
+
+            </tbody>
+
+        </table>
+
+        <p
+            th:if="${#lists.isEmpty(horarios)}"
+            class="mensagem">
+
+            Nenhum horário encontrado para esta turma.
+        </p>
+
+    </div>
+
+</div>
+
+</body>
+</html>

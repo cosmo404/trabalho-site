@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Turma</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+
+<body>
+
+<div class="container formulario">
+
+    <h1 th:text="${turma.id == null ? 'Nova Turma' : 'Editar Turma'}">
+        Turma
+    </h1>
+
+    <form
+        th:action="@{/turmas/salvar}"
+        th:object="${turma}"
+        method="post">
+
+        <input type="hidden" th:field="*{id}">
+
+        <div class="campo">
+
+            <label>Nome:</label>
+
+            <input
+                type="text"
+                th:field="*{nome}"
+                required>
+
+        </div>
+
+        <div class="campo">
+
+            <label>Período:</label>
+
+            <input
+                type="text"
+                th:field="*{periodo}"
+                placeholder="Ex: 4º período"
+                required>
+
+        </div>
+
+        <div class="botoes">
+
+            <button type="submit" class="botao">
+                Salvar
+            </button>
+
+            <a href="/turmas" class="botao cinza">
+                Cancelar
+            </a>
+
+        </div>
+
+    </form>
+
+</div>
+
+</body>
+</html>

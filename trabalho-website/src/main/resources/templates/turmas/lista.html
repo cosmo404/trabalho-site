@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Turmas</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>Turmas</h1>
+
+    <div class="topo">
+        <a href="/" class="botao cinza">Voltar</a>
+        <a href="/turmas/novo" class="botao">Nova Turma</a>
+    </div>
+
+    <table>
+
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nome</th>
+            <th>Período</th>
+            <th>Ações</th>
+        </tr>
+        </thead>
+
+        <tbody>
+
+        <tr th:each="turma : ${turmas}">
+
+            <td th:text="${turma.id}"></td>
+            <td th:text="${turma.nome}"></td>
+            <td th:text="${turma.periodo}"></td>
+
+            <td>
+
+                <a
+                    th:href="@{/turmas/editar/{id}(id=${turma.id})}"
+                    class="botao editar">
+
+                    Editar
+                </a>
+
+                <form
+                    th:action="@{/turmas/excluir/{id}(id=${turma.id})}"
+                    method="post"
+                    class="form-excluir">
+
+                    <button
+                        class="botao excluir"
+                        type="submit"
+                        onclick="return confirm('Deseja excluir esta turma?')">
+
+                        Excluir
+                    </button>
+
+                </form>
+
+            </td>
+
+        </tr>
+
+        </tbody>
+
+    </table>
+
+    <p
+        th:if="${#lists.isEmpty(turmas)}"
+        class="mensagem">
+
+        Nenhuma turma cadastrada.
+    </p>
+
+</div>
+
+</body>
+</html>
